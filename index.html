@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic.Pro-Net</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+        header {
+            background: url('background.webp') 0% 70%/cover no-repeat;
+            color: white;
+            text-align: center;
+            padding: 5rem 1rem;
+            position: relative;
+        }
+        header::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1;
+        }
+        header h1, header p {
+            position: relative;
+            z-index: 2;
+        }
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #333;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+        }
+        nav a:hover {
+            background-color: #575757;
+            border-radius: 5px;
+        }
+        nav .language-toggle button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+        }
+        .hero {
+            text-align: center;
+            color: white;
+            padding: 3rem;
+        }
+        .services {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 3rem;
+            background: #f4f4f4;
+        }
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease;
+            text-align: center;
+        }
+        .service-card:hover {
+            transform: translateY(-10px);
+        }
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+
+        }
+        .service-card h3 {
+            margin: 1rem 0;
+            text-align: center;
+        }
+        .testimonials {
+            padding: 3rem;
+            background: #333;
+            color: white;
+            text-align: center;
+        }
+        .testimonials p {
+            margin: 1rem auto;
+            max-width: 600px;
+        }
+        .declutter-section {
+            padding: 3rem;
+            background-color: #f8f8f8;
+            border-top: 2px solid #ddd;
+            text-align: center;
+        }
+
+        .declutter-section h2 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .declutter-section .subtitle {
+            font-size: 1.25rem;
+            color: #4CAF50;
+            margin-bottom: 1.5rem;
+            font-weight: bold;
+        }
+
+        .declutter-section p {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 1rem;
+        }
+        .declutter-content {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .declutter-text {
+            max-width: 600px;
+            text-align: left;
+        }
+
+        .declutter-image img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        #contact {
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 3rem;
+        }
+
+
+
+
+        footer {
+            background-color: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            width: 100%;
+            max-width: 500px;
+            margin: 3rem auto;
+        }
+        .contact-form input, .contact-form textarea, .contact-form button {
+            padding: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+        }
+        .contact-form button {
+            background: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        @media (max-width: 768px) {
+            nav {
+                flex-direction: column;
+            }
+        }
+        /* Modal Background */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Modal Content */
+        .modal-content {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            position: relative;
+        }
+
+        /* Close Button */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            color: black;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Basic.Pro-Net</h1>
+        <p><span id="welcome-message">Making Your Space Spotless!</span></p>
+    </header>
+    <nav>
+        <div>
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#declutter">Decluttering Services</a>
+            <a href="#testimonials">Testimonials</a>
+            <a href="#contact">Contact</a>
+            
+
+        </div>
+        <div class="language-toggle">
+            <button onclick="setLanguage('en')">English</button>
+            <button onclick="setLanguage('fr')">Français</button>
+        </div>
+    </nav>
+    <section class="services" id="services">
+        <div class="service-card">
+            <img src="residence.webp" alt="Residential Cleaning">
+            <h3 id="residential-title">Residential Cleaning</h3>
+            <p id="residential-desc">Keep your home clean and tidy with our reliable services.</p>
+            <button onclick="openModal('residentialModal')">More Details</button>
+        </div>
+        <div class="service-card">
+            <img src="office.webp" alt="Office Cleaning">
+            <h3 id="office-title">Office Cleaning</h3>
+            <p id="office-desc">Professional cleaning for a productive workspace.</p>
+            <button onclick="showDetails('office')">More Details</button>
+        </div>
+        <div class="service-card">
+            <img src="deep.webp" alt="Deep Cleaning">
+            <h3 id="deep-title">Deep Cleaning</h3>
+            <p id="deep-desc">Thorough cleaning for every corner of your space.</p>
+            <button onclick="showDetails('deep')">More Details</button>
+        </div>
+    </section>
+
+    <section id="declutter" class="declutter-section">
+        <div class="declutter-content">
+            <div class="declutter-text">
+                <h2 id="declutter-title">Unclutter Your Life</h2>
+                <p id="declutter-subtitle" class="subtitle">Estrie Experts in Professional Decluttering and Organizing Services</p>
+                <p id="declutter-paragraph-1">
+                    We take pride in offering professional commercial cleaning services that go beyond the ordinary. 
+                    Our team of highly trained and experienced professionals is dedicated to making your workspace shine. 
+                </p>
+                <p id="declutter-paragraph-2">
+                    Whether you’re searching for “professional commercial cleaners near me” or need top-notch business cleaning services, 
+                    We are your trusted partner. As a leading commercial cleaning agency, we understand the unique needs of each client, 
+                    and we tailor our services accordingly. From offices to retail spaces, we provide comprehensive commercial property 
+                    cleaning services that leave no corner untouched.
+                </p>
+            </div>
+            <div class="declutter-image">
+                <img src="declutter.webp" alt="Professional Decluttering and Organizing Services">
+            </div>
+        </div>
+    </section>
+
+
+
+    <section class="testimonials" id="testimonials">
+        <h2>What Our Clients Say</h2>
+        <div id="testimonial-list">
+            <p>"Amazing service! Highly recommend." - Jane Doe</p>
+            <p>"My office has never been cleaner!" - John Smith</p>
+        </div>
+    </section>
+    <section id="contact">
+        <h2>Contact Us</h2>
+        <form class="contact-form" action="contact.php" method="POST">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Your Email" required>
+            <textarea name="message" placeholder="Your Message" rows="4" required></textarea>
+            <button type="submit">Submit</button>
+        </form>
+
+    </section>
+    
+
+    <footer>
+        <p>&copy; 2024 Basic.Pro-Net. All rights reserved.</p>
+        <p>Phone: +1-800-123-4567 | Email: info@basicpronet.com</p>
+    </footer>
+    <!-- Modal for Residential Cleaning -->
+    <div id="residentialModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('residentialModal')">&times;</span>
+            <h2>Residential Cleaning Services</h2>
+            <p>
+                Our residential cleaning service ensures that every corner of your home is spotless. We handle everything from dusting surfaces 
+                to scrubbing floors, so you can enjoy a clean and comfortable living space.
+            </p>
+            <ul>
+                <li>Dust and wipe down all furniture and surfaces.</li>
+                <li>Vacuum carpets, rugs, and upholstered furniture.</li>
+                <li>Deep clean kitchens, including countertops, sinks, and appliances.</li>
+                <li>Scrub and sanitize bathrooms, including showers, toilets, and sinks.</li>
+                <li>Mop hardwood, tile, or laminate flooring.</li>
+                <li>Remove cobwebs and clean light fixtures.</li>
+            </ul>
+            <p>
+                Our team uses eco-friendly products and pays attention to the smallest details, ensuring your home feels fresh and welcoming.
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        const translations = {
+            en: {
+                welcomeMessage: "Making Your Space Spotless!",
+                residentialTitle: "Residential Cleaning",
+                residentialDesc: "Keep your home clean and tidy with our reliable services.",
+                officeTitle: "Office Cleaning",
+                officeDesc: "Professional cleaning for a productive workspace.",
+                deepTitle: "Deep Cleaning",
+                deepDesc: "Thorough cleaning for every corner of your space.",
+                declutterTitle: "Unclutter Your Life",
+                declutterSubtitle: "Estrie Experts in Professional Decluttering and Organizing Services",
+                declutterParagraph1: "We take pride in offering professional commercial cleaning services that go beyond the ordinary. Our team of highly trained and experienced professionals is dedicated to making your workspace shine.",
+                declutterParagraph2: "Whether you’re searching for “professional commercial cleaners near me” or need top-notch business cleaning services, We are your trusted partner. As a leading commercial cleaning agency, we understand the unique needs of each client, and we tailor our services accordingly. From offices to retail spaces, we provide comprehensive commercial property cleaning services that leave no corner untouched."
+
+            },
+            fr: {
+                welcomeMessage: "Rendre votre espace impeccable!",
+                residentialTitle: "Nettoyage Résidentiel",
+                residentialDesc: "Gardez votre maison propre et bien rangée grâce à nos services fiables.",
+                officeTitle: "Nettoyage de Bureau",
+                officeDesc: "Nettoyage professionnel pour un espace de travail productif.",
+                deepTitle: "Nettoyage Approfondi",
+                deepDesc: "Nettoyage minutieux pour chaque recoin de votre espace.",
+                declutterTitle: "Désencombrez Votre Vie",
+                declutterSubtitle: "Experts en Désencombrement et Organisation à Estrie",
+                declutterParagraph1: "Nous sommes fiers d'offrir des services de nettoyage commercial professionnels qui vont au-delà de l'ordinaire. Notre équipe de professionnels hautement qualifiés et expérimentés s'engage à faire briller votre espace de travail.",
+                declutterParagraph2: "Que vous recherchiez des “nettoyeurs commerciaux professionnels près de chez moi” ou des services de nettoyage d'entreprise de premier ordre, nous sommes votre partenaire de confiance. En tant qu'agence de nettoyage commercial de premier plan, nous comprenons les besoins uniques de chaque client et adaptons nos services en conséquence. Des bureaux aux espaces de vente, nous fournissons des services de nettoyage de propriétés commerciales complets qui ne laissent aucun coin intact."
+         
+            }
+        };
+
+        function setLanguage(lang) {
+            document.getElementById("welcome-message").textContent = translations[lang].welcomeMessage;
+            document.getElementById("residential-title").textContent = translations[lang].residentialTitle;
+            document.getElementById("residential-desc").textContent = translations[lang].residentialDesc;
+            document.getElementById("office-title").textContent = translations[lang].officeTitle;
+            document.getElementById("office-desc").textContent = translations[lang].officeDesc;
+            document.getElementById("deep-title").textContent = translations[lang].deepTitle;
+            document.getElementById("deep-desc").textContent = translations[lang].deepDesc;
+            document.getElementById("declutter-title").textContent = translations[lang].declutterTitle;
+            document.getElementById("declutter-subtitle").textContent = translations[lang].declutterSubtitle;
+            document.getElementById("declutter-paragraph-1").textContent = translations[lang].declutterParagraph1;
+            document.getElementById("declutter-paragraph-2").textContent = translations[lang].declutterParagraph2;
+
+        }
+
+        function showDetails(service) {
+            const details = {
+                residential: "Our residential cleaning service ensures every room in your home is spotless.",
+                office: "Our office cleaning service keeps your workspace clean and productive.",
+                deep: "Our deep cleaning service reaches every corner for a thorough clean."
+            };
+            alert(details[service]);
+        }
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex'; // Show the modal
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'none'; // Hide the modal
+        }
+
+        // Optional: Close modal when clicking outside of the content
+        window.onclick = function(event) {
+            const modal = document.getElementById('residentialModal');
+            if (event.target === modal) {
+                modal.style.display = 'none';
+            }
+        };
+
+    </script>
+</body>
+</html>
