@@ -260,13 +260,15 @@
             <img src="office.webp" alt="Office Cleaning">
             <h3 id="office-title">Office Cleaning</h3>
             <p id="office-desc">Professional cleaning for a productive workspace.</p>
-            <button onclick="showDetails('office')">More Details</button>
+            <button onclick="openModal('officeModal')">More Details</button>
+
         </div>
         <div class="service-card">
             <img src="deep.webp" alt="Deep Cleaning">
             <h3 id="deep-title">Deep Cleaning</h3>
             <p id="deep-desc">Thorough cleaning for every corner of your space.</p>
-            <button onclick="showDetails('deep')">More Details</button>
+            <button onclick="openModal('deepCleaningModal')">More Details</button>
+
         </div>
     </section>
 
@@ -341,6 +343,54 @@
         </div>
     </div>
 
+    <!-- Modal for Office Cleaning -->
+    <div id="officeModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('officeModal')">&times;</span>
+            <h2>Office Cleaning Services</h2>
+            <p>
+                Our Office Cleaning Services ensure a clean and productive workspace for your team. We take care of everything from 
+                dusting and vacuuming to sanitizing high-touch areas, so you can focus on what matters most—running your business.
+            </p>
+            <ul>
+                <li>Dust all desks, shelves, and office furniture.</li>
+                <li>Sanitize keyboards, phones, and other high-touch equipment.</li>
+                <li>Clean and organize common areas such as lobbies and breakrooms.</li>
+                <li>Vacuum carpets and rugs, and mop hard flooring.</li>
+                <li>Empty trash bins and replace liners.</li>
+                <li>Disinfect door handles, light switches, and shared surfaces.</li>
+            </ul>
+            <p>
+                Our professional team ensures your office environment is spotless, healthy, and welcoming, leaving a lasting impression 
+                on your employees and visitors alike.
+            </p>
+        </div>
+    </div>
+    <!-- Modal for Deep Cleaning -->
+    <div id="deepCleaningModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('deepCleaningModal')">&times;</span>
+            <h2>Deep Cleaning Services</h2>
+            <p>
+                Our Deep Cleaning Services provide a thorough, top-to-bottom clean for every corner of your space. Perfect for 
+                moving in, moving out, or a seasonal refresh, our professional team ensures no detail is missed.
+            </p>
+            <ul>
+                <li>Deep clean all surfaces, including hidden and hard-to-reach areas.</li>
+                <li>Scrub and sanitize bathrooms, kitchens, and appliances.</li>
+                <li>Vacuum and shampoo carpets, rugs, and upholstery.</li>
+                <li>Wipe and sanitize baseboards, walls, and window sills.</li>
+                <li>Clean light fixtures, vents, and ceiling fans.</li>
+                <li>Polish hardwood, tile, or laminate flooring for a fresh finish.</li>
+            </ul>
+            <p>
+                Our meticulous attention to detail ensures your space feels fresh, hygienic, and renewed from corner to corner.
+            </p>
+        </div>
+    </div>
+
+
+
 
     <script>
         const translations = {
@@ -390,30 +440,54 @@
         }
 
         function showDetails(service) {
+            const modal = document.getElementById("detailsModal");
+            const modalContent = document.getElementById("modalContent");
             const details = {
                 residential: "Our residential cleaning service ensures every room in your home is spotless.",
                 office: "Our office cleaning service keeps your workspace clean and productive.",
                 deep: "Our deep cleaning service reaches every corner for a thorough clean."
             };
-            alert(details[service]);
+            // Set the modal content
+            modalContent.textContent = details[service];
+
+            if (details[service]) {
+                alert(details[service]);
+            } else {
+                alert("Service details not found.");
+            }
+
+            // Open the modal
+            openModal('detailsModal');
+
         }
+
         function openModal(modalId) {
             const modal = document.getElementById(modalId);
-            modal.style.display = 'flex'; // Show the modal
+            if (modal) {
+                modal.style.display = 'flex'; // Show the modal
+            } else {
+                console.error(`Modal with ID '${modalId}' not found.`);
+            }
         }
 
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
-            modal.style.display = 'none'; // Hide the modal
+            if (modal) {
+                modal.style.display = 'none'; // Hide the modal
+            } else {
+                console.error(`Modal with ID '${modalId}' not found.`);
+            }
         }
 
-        // Optional: Close modal when clicking outside of the content
         window.onclick = function(event) {
-            const modal = document.getElementById('residentialModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
+            const modals = document.querySelectorAll('.modal');
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
         };
+
 
     </script>
 </body>
