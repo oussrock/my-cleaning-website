@@ -46,7 +46,7 @@
             justify-content: space-between;
             align-items: center;
             background-color: #333;
-            padding: 1rem 0;
+            padding: 1rem 1rem;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -54,7 +54,7 @@
         nav a {
             color: white;
             text-decoration: none;
-            padding: 0.5rem 1rem;
+            padding: 0 1rem;
         }
         nav a:hover {
             background-color: #575757;
@@ -65,10 +65,10 @@
             border: none;
             color: white;
             cursor: pointer;
-            padding: 0.5rem 1rem;
+            padding: 0 1rem;
         }
         button, a {
-            padding: 1rem 1.5rem;
+            padding: 1rem 1rem;
             font-size: 1rem;
             touch-action: manipulation;
         }
@@ -76,6 +76,7 @@
        .nav-links {
             display: flex;
             gap: 1rem; /* Add spacing between nav emojis */
+            position: relative;
         }
 
         .hero {
@@ -209,7 +210,7 @@
         @media (max-width: 768px) {
             nav {
                 flex-direction: column;
-                align-items: center;
+                align-items: start;
                 text-align: center;
             }
         }
@@ -228,7 +229,7 @@
             }
 
             nav a {
-                padding: 0.5rem;
+                padding: 1rem 1rem;
             }
         }
         /* Modal Background */
@@ -280,8 +281,8 @@
             .nav-links {
                 display: flex; /* Use Flexbox */
                 justify-content: space-evenly; /* Space emojis evenly across the line */
-                align-items: left; /* Align emojis vertically in the center */
-                gap: 2rem; /* Optional: Add spacing between emojis */
+                align-items: start; /* Align emojis vertically in the center */
+                gap: 0 1rem ; /* Optional: Add spacing between emojis */
             }
             .nav-links a {
                 font-size: 0; /* Make the icons/emojis bigger */
@@ -296,7 +297,7 @@
                 text-indent: 1.5rem; /* Show emoji */
                 position: absolute;
                 left: 50%;
-                transform: translateX(-50%);
+                /*transform: translateX(-50%);*/
                 font-size: 1.5rem;
                 text-align: center;
 
@@ -306,19 +307,19 @@
                 font-size: 1.5rem; /* Increase emoji size */
                 text-indent: -9999px; /* Hide text */
                 position: relative;
-                align-items: 0 0;
+                align-items: right;
             }
 
             .language-toggle button::before {
                 content: attr(data-icon); /* Insert emoji */
                 text-indent: 0; /* Reset text-indent */
                 position: absolute;
-                left: 50%;
+                left: 100%;
                 transform: translateX(-50%);
             }
 
             nav {
-                flex-direction: column; /* Stack navigation vertically */
+                flex-direction: row; /* Stack navigation vertically */
                 text-align: center;
             }
         }
@@ -351,13 +352,13 @@
             <a href="#declutter" data-icon="📦">Declutter</a>
             <a href="#testimonials" data-icon="🗣️">Testimonials</a>
             <a href="#contact" data-icon="📧">Contact</a>
-        
+        </div>       
             <div class="language-toggle">
                 <button id="btn-en" data-icon="🇬🇧" data-text="English" onclick="setLanguage('en')">English</button>
                 <button id="btn-fr" data-icon="🇫🇷" data-text="Français" onclick="setLanguage('fr')">Français</button>
             </div>
 
-        </div>
+
     </nav>
     <section class="services" id="services">
         <div class="service-card">
